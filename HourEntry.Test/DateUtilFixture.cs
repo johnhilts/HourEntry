@@ -2,7 +2,6 @@
 using System.Data;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 using Bll.HourEntry;
 

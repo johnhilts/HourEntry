@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\PopulateSubProductIds\Tests\bin\Debug\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,16 +46,19 @@
   <ItemGroup>
     <Compile Include="DateUtilFixture.cs" />
     <Compile Include="helper\helper.cs" />
-    <Compile Include="HourFixture.cs" />
-    <Compile Include="PresentationTests\HourEditPresenterFixture.cs" />
-    <Compile Include="PresentationTests\HourPresenterFixture.cs" />
-    <Compile Include="PresentationTests\HourSummaryPresenterFixture.cs" />
-    <Compile Include="PresentationTests\ProjectPresenter.cs" />
-    <Compile Include="PresentationTests\StatisticsPresenterFixture.cs" />
-    <Compile Include="PresentationTests\TimeSheetPresenterFixture.cs" />
-    <Compile Include="ProjectFixture.cs" />
+    <Compile Include="ProjectFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticsFixture.cs" />
+    <Compile Include="StatisticsFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hour.Domain\Hour.Domain.csproj">
+      <Project>{661CBDE3-B53C-49FC-9F38-AF1B28D46258}</Project>
+      <Name>Hour.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,7 @@
 using System.Data;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using mock = NMock2;
+using Moq;
 
 using Bll.HourEntry;
 using dal = Bll.HourEntry.Dal;
@@ -43,37 +42,39 @@ namespace UnitTests.Statistics
         }
         private decimal SumHours(int projectId, DateTime startDate, DateTime endDate)
         {
-            mock.Mockery mockery = new mock.Mockery();
-
+            // arrange
+            Mock<IHour> mockHours = this.GetMockHours();
             StatisticAnalyzer stats = new StatisticAnalyzer();
-            stats.Hours = this.GetMockHours(mockery);
-            stats.Projects = this.GetMockProjects(mockery);
+            stats.Hours = mockHours.Object;
+            stats.Projects = this.GetMockProjects().Object;
 
+            // action
             List<StatisticEntry> hoursTable = stats.sumhours(startDate, endDate, projectId, "");
             decimal hours = 0;
             foreach (StatisticEntry dr in hoursTable)
             {
                 hours += dr.Hours;
             }
-            Assert.That(hours, Is.GreaterThan(0), "No Hours");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            // assert
+            Assert.That(hours, Is.GreaterThan(0), "No Hours");
+            mockHours.VerifyAll();
 
             return hours;
         }
-        private IHour GetMockHours(mock.Mockery mockery)
+        private Mock<IHour> GetMockHours()
         {
-            IHour mockHour = (IHour)mockery.NewMock(typeof(IHour));
+            Mock<IHour> mockHour = new Mock<IHour>();
             DataTable mockHourTable = helper.GetMockHoursData(true);
-            mock.Expect.Once.On(mockHour).Method("List").Will(mock.Return.Value(mockHourTable));
+            mockHour.Setup<DataTable>(x => x.List()).Returns(mockHourTable);
 
             return mockHour;
         }
-        private IProject GetMockProjects(mock.Mockery mockery)
+        private Mock<IProject> GetMockProjects()
         {
-            IProject mockProject = (IProject)mockery.NewMock(typeof(IProject));
+            Mock<IProject> mockProject = new Mock<IProject>();
             DataTable mockProjectTable = helper.GetMockProjectData(true);
-            mock.Expect.Once.On(mockProject).Method("List").Will(mock.Return.Value(mockProjectTable));
+            mockProject.Setup<DataTable>(x => x.List()).Returns(mockProjectTable);
 
             return mockProject;
         }
