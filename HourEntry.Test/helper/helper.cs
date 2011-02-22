@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using HourEntry.Infrastructure.Database.Data;
 
 namespace UnitTests.HourEntry.Helpers
 {
@@ -69,12 +71,35 @@ namespace UnitTests.HourEntry.Helpers
             return projects;
         }
 
+        internal static List<ProjectData> GetMockProjectList()
+        {
+            return GetMockProjectList(false);
+        }
+
+        internal static List<ProjectData> GetMockProjectList(bool addMultiple)
+        {
+            List<ProjectData> projectList = new List<ProjectData>();
+            AddProjectRow(projectList, 1, "This is a Test.");
+            if (addMultiple)
+                AddProjectRow(projectList, 2, "This is another Test.");
+            return projectList;
+        }
+
         private static void AddProjectRow(DataTable projects, int projectId, string description)
         {
             DataRow dr = projects.NewRow();
             dr["ProjectID"] = projectId;
             dr["Description"] = description;
             projects.Rows.Add(dr);
+        }
+
+        private static void AddProjectRow(List<ProjectData> projectList, int projectId, string description)
+        {
+            projectList.Add(new ProjectData
+                                {
+                                    ProjectId = projectId,
+                                    Description = description,
+                                });
         }
     }
 }

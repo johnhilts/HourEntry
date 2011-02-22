@@ -1,9 +1,8 @@
 using System;
 using System.Data;
-
+using Bll.HourEntry.Dal;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using mock = NMock2;
+using Moq;
 
 using Bll.HourEntry;
 using dal = Bll.HourEntry.Dal;
@@ -17,20 +16,20 @@ namespace UnitTests.HourEntry.Projects
         [Test]
         public void List()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Project project = new Project("/DataFiles");
-            project.DataHelper = this.GetMockData(mockery);
+            project.DataHelper = mockData.Object;
             DataTable projects = ((IProject)project).List();
             Assert.That(projects, Is.Not.Null, "Projects NULL");
             Assert.That(projects.Rows.Count, Is.GreaterThan(0), "Projects - no data");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
-        private dal.IDataHelper GetMockData(mock.Mockery mockery)
+        private Mock<dal.IDataHelper> GetMockData()
         {
-            dal.IDataHelper mockData = (dal.IDataHelper)mockery.NewMock(typeof(dal.IDataHelper));
+            Mock<dal.IDataHelper> mockData = new Mock<IDataHelper>();
             DataTable mockProjects = helper.GetMockProjectData();
-            mock.Expect.Once.On(mockData).Method("GetData").With("Projects").Will(mock.Return.Value(mockProjects));
+            mockData.Setup(x => x.GetData("Projects")).Returns(mockProjects);
 
             return mockData;
         }
@@ -38,106 +37,64 @@ namespace UnitTests.HourEntry.Projects
         [Test]
         public void GetRecord()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Project project = new Project("/DataFiles");
-            project.DataHelper = this.GetMockData(mockery);
+            project.DataHelper = mockData.Object;
             int projectId = 1;
             ((IProject)project).GetRecord(projectId);
             Assert.That(project.ProjectId, Is.EqualTo(1), "Project Story ID Wrong");
             Assert.That(project.Description, Is.EqualTo("This is a Test."), "Project Description Wrong");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
         [Test]
         public void GetRecord_NoRecords()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Project project = new Project("/DataFiles");
-            project.DataHelper = this.GetMockData(mockery);
+            project.DataHelper = mockData.Object;
             int projectId = 0;
             DataTable projectTable = ((IProject)project).GetRecord(projectId);
             Assert.That(projectTable.Rows.Count, Is.EqualTo(0), "Should be no rows");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
 
         [Test]
         public void Update()
         {
-            mock.Mockery mockery = new mock.Mockery();
-
+            Mock<dal.IDataHelper> mockData = this.GetMockData_ForSaving();
             Project project = new Project("/DataFiles");
-            project.DataHelper = this.GetMockData_ForSaving(mockery);
+            project.DataHelper = mockData.Object;
 
             int projectId = 1;
             string description = "This is a Test.";
             ((IProject)project).Update(projectId, description);
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
-        private dal.IDataHelper GetMockData_ForSaving(mock.Mockery mockery)
+        private Mock<dal.IDataHelper> GetMockData_ForSaving()
         {
-            dal.IDataHelper mockData = this.GetMockData(mockery);
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             // not sure why this fails mock.Expect.Once.On(mockData).Method("SetData").With(this.SetData(this.GetMockProjects()));
-            mock.Expect.Once.On(mockData).Method("SetData").WithAnyArguments();
+            //mockData.Setup(x => x.SetData("Projects", helper.GetMockProjectData()));
+            //mock.Expect.Once.On(mockData).Method("SetData").WithAnyArguments();
 
             return mockData;
         }
-        //private DataTable SetData(DataTable projects)
-        //{
-        //    int projectId = 1;
-        //    DataRow project = projects.Select("ProjectID = " + projectId.ToString())[0];
-        //    project["StoryID"] = 1;
-        //    project["Description"] = "This is a Test.";
-        //    return projects;
-        //}
-        //[Test]
-        //public void AddNewAndSave()
-        //{
-        //    mock.Mockery mockery = new mock.Mockery();
-
-        //    Project project = new Project("/DataFiles");
-        //    project.DataHelper = this.GetMockData_ForSaving(mockery);
-
-        //    int projectId = ((IModel)project).AddNewAndSave();
-        //    Assert.That(projectId, Is.EqualTo(2), "Wrong New Project Id");
-
-        //    mockery.VerifyAllExpectationsHaveBeenMet();
-        //}
 
         [Test]
         public void Add()
         {
-            mock.Mockery mockery = new mock.Mockery();
-
+            Mock<dal.IDataHelper> mockData = this.GetMockData_ForSaving();
             Project project = new Project("/DataFiles");
-            project.DataHelper = this.GetMockData_ForSaving(mockery);
+            project.DataHelper = mockData.Object;
 
             int projectId = ((IProject)project).Add("Test Description");
             Assert.That(projectId, Is.EqualTo(2), "Wrong New Project Id");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
 
-        //[Test]
-        //public void Update()
-        //{
-        //    mock.Mockery mockery = new mock.Mockery();
-
-        //    Project project = new Project("/DataFiles");
-        //    project.DataHelper = this.GetMockData_ForSaving(mockery);
-
-        //    int projectId = 1;
-        //    project.Update(projectId, "Test Description");
-
-        //    mockery.VerifyAllExpectationsHaveBeenMet();
-        //}
-
-        //[Test, ExpectedException(ExceptionType = typeof(ApplicationException), 
-        //    ExpectedMessage = "Parameterless ctor requires HTTP Context")]
-        //public void InstantiateProjectShouldCauseHttpError()
-        //{
-        //    Project p = new Project();
-        //}
     }
 }

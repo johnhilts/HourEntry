@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F3AFC837-921A-4B5A-B510-7B86C83D6F36}</ProjectGuid>
+    <ProjectGuid>{661CBDE3-B53C-49FC-9F38-AF1B28D46258}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HourEntry.Test</RootNamespace>
-    <AssemblyName>HourEntry.Test</AssemblyName>
+    <RootNamespace>HourEntry.Domain</RootNamespace>
+    <AssemblyName>HourEntry.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\..\..\..\PopulateSubProductIds\Tests\bin\Debug\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,36 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateUtilFixture.cs" />
-    <Compile Include="helper\helper.cs" />
-    <Compile Include="HourFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ProjectFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="BllBase.cs" />
+    <Compile Include="DataHelper.cs" />
+    <Compile Include="DateUtil.cs" />
+    <Compile Include="Hour.cs" />
+    <Compile Include="IDataHelper.cs" />
+    <Compile Include="IHour.cs" />
+    <Compile Include="IProject.cs" />
+    <Compile Include="IStatisticAnalyzer.cs" />
+    <Compile Include="Projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\Services\ProjectServiceTests.cs" />
-    <Compile Include="StatisticsFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Hour.Domain\HourEntry.Domain.csproj">
-      <Project>{661CBDE3-B53C-49FC-9F38-AF1B28D46258}</Project>
-      <Name>HourEntry.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HourEntry.Infrastructure\HourEntry.Infrastructure.csproj">
-      <Project>{7B1B3DD3-828A-4C36-B22F-99AAE01E91A3}</Project>
-      <Name>HourEntry.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HourEntry.Services\HourEntry.Services.csproj">
-      <Project>{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}</Project>
-      <Name>HourEntry.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Stories.txt" />
+    <Compile Include="StatisticEntry.cs" />
+    <Compile Include="Statistics.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

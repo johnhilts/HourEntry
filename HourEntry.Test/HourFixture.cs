@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data;
-
+using Bll.HourEntry.Dal;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using mock = NMock2;
+using Moq;
 
 using Bll.HourEntry;
 using dal = Bll.HourEntry.Dal;
@@ -17,20 +16,20 @@ namespace UnitTests.HourEntry
         [Test]
         public void List()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Hour hour = new Hour("/DataFiles");
-            hour.DataHelper = this.GetMockData(mockery);
+            hour.DataHelper = mockData.Object;
             DataTable hours = ((IHour)hour).List();
             Assert.That(hours, Is.Not.Null, "Hours NULL");
             Assert.That(hours.Rows.Count, Is.GreaterThan(0), "Hours - no data");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
-        private dal.IDataHelper GetMockData(mock.Mockery mockery)
+        private Mock<dal.IDataHelper> GetMockData()
         {
-            dal.IDataHelper mockData = (dal.IDataHelper)mockery.NewMock(typeof(dal.IDataHelper));
+            Mock<dal.IDataHelper> mockData = new Mock<IDataHelper>();
             DataTable mockHours = helper.GetMockHoursData();
-            mock.Expect.Once.On(mockData).Method("GetData").With("HourEntries").Will(mock.Return.Value(mockHours));
+            mockData.Setup(x => x.GetData("HourEntries")).Returns(mockHours);
 
             return mockData;
         }
@@ -38,9 +37,9 @@ namespace UnitTests.HourEntry
         [Test]
         public void GetRecord()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Hour hour = new Hour("/DataFiles");
-            hour.DataHelper = this.GetMockData(mockery);
+            hour.DataHelper = mockData.Object;
             int rowId = 1;
             ((IHour)hour).GetRecord(rowId);
             Assert.That(hour.RowId, Is.EqualTo(1), "Hour ID Wrong");
@@ -50,28 +49,28 @@ namespace UnitTests.HourEntry
             Assert.That(hour.ProjectId, Is.EqualTo(1), "Project ID Wrong");
             Assert.That(hour.Comments, Is.EqualTo("This is a Test."), "Comments Wrong");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
         [Test]
         public void GetRecord_NoRecords()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             Hour hour = new Hour("/DataFiles");
-            hour.DataHelper = this.GetMockData(mockery);
+            hour.DataHelper = mockData.Object;
             int rowId = 0;
             DataTable hourTable = ((IHour)hour).GetRecord(rowId);
             Assert.That(hourTable.Rows.Count, Is.EqualTo(0), "Should be no rows");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
 
         [Test]
         public void Update()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData_ForSaving();
 
             Hour hour = new Hour("/DataFiles");
-            hour.DataHelper = this.GetMockData_ForSaving(mockery);
+            hour.DataHelper = mockData.Object;
 
             int rowId = 1;
             int projectId = 1;
@@ -81,13 +80,14 @@ namespace UnitTests.HourEntry
             string comments = "This is a Test.";
             ((IHour)hour).Update(rowId, projectId, hours, startDate, endDate, comments);
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
-        private dal.IDataHelper GetMockData_ForSaving(mock.Mockery mockery)
+        private Mock<dal.IDataHelper> GetMockData_ForSaving()
         {
-            dal.IDataHelper mockData = this.GetMockData(mockery);
+            Mock<dal.IDataHelper> mockData = this.GetMockData();
             // not sure why this fails mock.Expect.Once.On(mockData).Method("SetData").With(this.SetData(this.GetMockProjects()));
-            mock.Expect.Once.On(mockData).Method("SetData").WithAnyArguments();
+            //mockData.Setup(x => x.SetData("Projects", helper.GetMockProjectData()));
+            //mock.Expect.Once.On(mockData).Method("SetData").WithAnyArguments();
 
             return mockData;
         }
@@ -95,10 +95,10 @@ namespace UnitTests.HourEntry
         [Test]
         public void Add()
         {
-            mock.Mockery mockery = new mock.Mockery();
+            Mock<dal.IDataHelper> mockData = this.GetMockData_ForSaving();
 
             Hour hour = new Hour("/DataFiles");
-            hour.DataHelper = this.GetMockData_ForSaving(mockery);
+            hour.DataHelper = mockData.Object;
 
             int projectId = 1;
             decimal hours = 1.5M;
@@ -108,7 +108,7 @@ namespace UnitTests.HourEntry
             int hourId = ((IHour)hour).Add(projectId, hours, startDate, endDate, comments);
             Assert.That(hourId, Is.EqualTo(2), "Wrong New Row Id");
 
-            mockery.VerifyAllExpectationsHaveBeenMet();
+            mockData.VerifyAll();
         }
     }
 }
