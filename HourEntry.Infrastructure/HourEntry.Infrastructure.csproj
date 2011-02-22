@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{661CBDE3-B53C-49FC-9F38-AF1B28D46258}</ProjectGuid>
+    <ProjectGuid>{7B1B3DD3-828A-4C36-B22F-99AAE01E91A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hour.Domain</RootNamespace>
-    <AssemblyName>Hour.Domain</AssemblyName>
+    <RootNamespace>HourEntry.Infrastructure</RootNamespace>
+    <AssemblyName>HourEntry.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,18 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BllBase.cs" />
-    <Compile Include="DataHelper.cs" />
-    <Compile Include="DateUtil.cs" />
-    <Compile Include="Hour.cs" />
-    <Compile Include="IDataHelper.cs" />
-    <Compile Include="IHour.cs" />
-    <Compile Include="IProject.cs" />
-    <Compile Include="IStatisticAnalyzer.cs" />
-    <Compile Include="Projects.cs" />
+    <Compile Include="Database\BaseRepository.cs" />
+    <Compile Include="Database\Data\ProjectData.cs" />
+    <Compile Include="Database\IProjectRepository.cs" />
+    <Compile Include="Database\ProjectRepository.cs" />
+    <Compile Include="Database\Data\HourEntryData.cs" />
+    <Compile Include="Database\HourEntryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticEntry.cs" />
-    <Compile Include="Statistics.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
