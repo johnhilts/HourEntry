@@ -4,7 +4,7 @@ using HourEntry.Infrastructure.Database.Data;
 
 namespace HourEntry.Infrastructure.Database
 {
-    public class HourEntryRepository : BaseRepository
+    public class HourEntryRepository : BaseRepository, IHourEntryRepository
     {
         public List<HourEntryData> GetHourEntryList()
         {
@@ -22,6 +22,18 @@ namespace HourEntry.Infrastructure.Database
             IQueryable<HourEntryData> hourEntryData = hourEntryTable;
 
             return hourEntryData.Where(m => m.HourEntryId.Equals(hourEntryId)).SingleOrDefault();
+        }
+
+        public void SaveHourEntryData(HourEntryData hourEntryData)
+        {
+            if (this.GetHourEntryDataByHourEntryId(hourEntryData.HourEntryId) == null)
+            {
+                base.InsertData(hourEntryData);
+            }
+            else
+            {
+                base.UpdateData(hourEntryData);
+            }
         }
     }
 }

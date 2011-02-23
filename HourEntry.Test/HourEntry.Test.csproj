@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\Services\HourEntryServiceTests.cs" />
     <Compile Include="UnitTests\Utility\DateUtilFixture.cs" />
     <Compile Include="helper\helper.cs" />
     <Compile Include="HourFixture.cs">

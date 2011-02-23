@@ -53,6 +53,49 @@ namespace UnitTests.HourEntry.Helpers
             hours.Rows.Add(dr);
         }
 
+        internal static List<HourEntryData> GetMockHoursList()
+        {
+            return helper.GetMockHoursList(false);
+        }
+
+        internal static List<HourEntryData> GetMockHoursList(bool addMultiple)
+        {
+            return helper.GetMockHoursList(DateTime.Today, DateTime.Today, addMultiple);
+        }
+
+        internal static List<HourEntryData> GetMockHoursList(DateTime startDate, DateTime endDate)
+        {
+            return helper.GetMockHoursList(startDate, endDate, false);
+        }
+
+        internal static List<HourEntryData> GetMockHoursList(DateTime startDate, DateTime endDate, bool addMultiple)
+        {
+            List<HourEntryData> hourList = new List<HourEntryData>();
+            AddHourRow(startDate, endDate, hourList, 1);
+            if (addMultiple)
+            {
+                AddHourRow(startDate, endDate, hourList, 2);
+                AddHourRow(startDate.AddDays(5), endDate.AddDays(5), hourList, 2);
+            }
+
+            return hourList;
+        }
+
+        private static void AddHourRow(DateTime startDate, DateTime endDate, List<HourEntryData> hourList, int projectId)
+        {
+            // TODO: need to get rid of these magic values
+            hourList.Add(new HourEntryData
+                          {
+                              HourEntryId = 1,
+                              Hours = 1.5m,
+                              ProjectId = projectId,
+                              StartDate = startDate,
+                              EndDate = endDate,
+                              Comments = "This is a Test.",
+                          });
+        }
+
+
         internal static DataTable GetMockProjectData()
         {
             return GetMockProjectData(false);

@@ -17,10 +17,16 @@ Hour
 Project
 User
 
+entities are not DTOs - entities traffic in DTOs
+
+entities are classes with behavior - remember, they adhere to SRP and have methods to operate on class' state/data
+
 ==Services==
 Statistics
 Hours
 Projects
+
+services can be on any layer - app, domain, or infrastructure
 
 ==Presenter==
 UI services
