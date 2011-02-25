@@ -1,0 +1,24 @@
+﻿Time Sheet Mode Screen
+
+- note which user is being saved
+	need to add user property
+	login needs to occur if not already logged-in - use [authenticate] attribute
+
+- Dates - use textboxes that will re-use ajax calendar control
+	try Jquery UI plug-in - also read Karl Seguin's blog
+
+UI - input controls
+Control - Get data via model binding
+leave models in web project (?) - we can't really re-use them ... right? check my books - what's their stance?
+
+Controller:
+Model.Validate
+	log & display error msg (use elmah for log)
+UI.Service.Validate(user input) - note: the core of this is in Domain.Entity.Validate
+	log & display error msg
+map user input => DTO
+Domain.Service.Save(DTO)
+
+Domain.Service.Save(DTO):
+re-validate - re-use Domain.Entity.Validate
+call Entity.Save()
