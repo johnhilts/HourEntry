@@ -1,0 +1,14 @@
+﻿@model HourEntry.Web.Models.TimeSheetModel
+@{
+    ViewBag.Title = "TimeSheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Time Sheet</h2>
+@using (Html.BeginForm())
+{ 
+
+    @Html.EditorFor(m => m.Comments);
+
+    @Html.EditorFor(m => m.StartDate);
+}

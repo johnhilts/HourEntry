@@ -7,8 +7,17 @@
 - same functionality for now
 
 "TimeSheet Mode"
-- note which user is being saved
+== GET ==
+- note which user is being saved [authenticated]
 - Dates - use textboxes that will re-use ajax calendar control
+- should load hours, minutes, am/pm
+- should load project list
+- should load today's date into start and end date entry textboxes
+
+have a service call a domain object that gets me all of that info to feed my model
+
+== POST ==
+
 
 Domain
 

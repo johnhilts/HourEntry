@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourEntry.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourEntry.Services", "HourEntry.Services\HourEntry.Services.csproj", "{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UxTestLibrary", "UxTestLibrary\UxTestLibrary.csproj", "{8BFDEB26-D36A-443A-8D39-F8C8CA7C8737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFDEB26-D36A-443A-8D39-F8C8CA7C8737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFDEB26-D36A-443A-8D39-F8C8CA7C8737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFDEB26-D36A-443A-8D39-F8C8CA7C8737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFDEB26-D36A-443A-8D39-F8C8CA7C8737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
