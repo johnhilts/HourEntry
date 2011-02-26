@@ -8,7 +8,10 @@
 @using (Html.BeginForm())
 { 
 
+    @Html.DropDownListFor(m => m.AmPm, ViewBag.AmPmList as List<SelectListItem>);
+                                          
     @Html.EditorFor(m => m.Comments);
 
     @Html.EditorFor(m => m.StartDate);
+    @Html.EditorFor(m => m.EndDate);
 }

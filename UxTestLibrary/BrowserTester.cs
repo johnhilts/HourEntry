@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using WatiN.Core;
@@ -153,6 +154,24 @@ namespace UxTestLibrary
             Settings.Instance.WaitForCompleteTimeOut = timeoutSeconds;
             Settings.Instance.WaitUntilExistsTimeOut = timeoutSeconds;
             this._ie.WaitForComplete(new WaitForComplete(this._ie.DomContainer));
+        }
+
+        /// <summary>
+        /// Verify that text field's text is equal to supplied string
+        /// </summary>
+        /// <param name="id">control ID</param>
+        /// <param name="controlName">friendly name for convenience</param>
+        /// <param name="verifyList">list to verify against</param>
+        public void VerifySelect(string id, string controlName, Hashtable verifyList)
+        {
+            SelectList selectList = this._ie.SelectList(Find.ById(new Regex(id)));
+            Assert.That(selectList.Exists, Is.True, "No {0} Select List", controlName);
+            Hashtable actualList = new Hashtable();
+            foreach (string s in selectList.AllContents)
+            {
+                actualList.Add(s, s);
+            }
+            Assert.That(actualList, Is.EquivalentTo(verifyList), "Lists Don't match: {0}", controlName);
         }
 
         /// <summary>

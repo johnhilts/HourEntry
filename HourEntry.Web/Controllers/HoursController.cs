@@ -18,7 +18,21 @@ namespace HourEntry.Web.Controllers
         /// <returns>Model</returns>
         public ViewResult TimeSheet()
         {
-            return View(new TimeSheetModel { StartDate = DateTime.Today });
+            List<SelectListItem> amPmList = new List<SelectListItem>
+                       {
+                           new SelectListItem {Selected = false, Text = "AM", Value = "AM"},
+                           new SelectListItem {Selected = false, Text = "PM", Value = "PM"},
+                       };
+
+            ViewBag.AmPmList = amPmList;
+            TimeSheetModel model = new TimeSheetModel
+                                       {
+                                           AmPm = "AM",
+                                           StartDate = DateTime.Today,
+                                           EndDate = DateTime.Today,
+                                       };
+
+            return View(model);
         }
 
     }

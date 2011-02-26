@@ -16,7 +16,7 @@ namespace HourEntry.Web.Models
 
         public List<short> MinuteList { get; set; }
         
-        public List<string> AmPmList { get; set; }
+        public string AmPm { get; set; }
         
         public List<string> ProjectList { get; set; }
         
@@ -26,7 +26,10 @@ namespace HourEntry.Web.Models
         [DataType(DataType.Date)]
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
-        
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayName("Start Date")]
         public DateTime EndDate { get; set; }
     }
 }

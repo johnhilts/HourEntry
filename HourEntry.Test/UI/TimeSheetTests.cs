@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using UxTestLibrary;
 namespace HourEntry.Test.UI
 {
     [TestFixture]
-    public class TimeSheetTests
+    public class TimeSheetUxTests
     {
         private BrowserTester _browserTester;
         private Tester _tester;
@@ -39,6 +40,8 @@ namespace HourEntry.Test.UI
 
         private void VerifyControlsPopulatedWithDefaultValues()
         {
+            Hashtable amPmList = new Hashtable {{"AM", "AM"}, {"PM", "PM"}};
+            this._browserTester.VerifySelect("AmPm", "AM PM List", amPmList);
             this._browserTester.VerifyText("StartDate", "Start Date", DateTime.Today.ToShortDateString());
             this._browserTester.VerifyText("EndDate", "End Date", DateTime.Today.ToShortDateString());
         }
