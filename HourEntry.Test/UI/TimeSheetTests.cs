@@ -40,12 +40,23 @@ namespace HourEntry.Test.UI
 
         private void VerifyControlsPopulatedWithDefaultValues()
         {
-            Hashtable startHourList = new Hashtable {{"1", "1"}, {"2", "2"}};
+            Hashtable startHourList = this.GetHourList();
             this._browserTester.VerifySelect("StartHour", "Start Hour List", startHourList);
-            Hashtable amPmList = new Hashtable {{"AM", "AM"}, {"PM", "PM"}};
+            Hashtable amPmList = new Hashtable { { "AM", "AM" }, { "PM", "PM" } };
             this._browserTester.VerifySelect("AmPm", "AM PM List", amPmList);
             this._browserTester.VerifyText("StartDate", "Start Date", DateTime.Today.ToShortDateString());
             this._browserTester.VerifyText("EndDate", "End Date", DateTime.Today.ToShortDateString());
+        }
+
+        private Hashtable GetHourList()
+        {
+            Hashtable hourList = new Hashtable();
+            for (int hour = 1; hour < 12; hour++)
+            {
+                hourList.Add(hour.ToString(), hour.ToString());
+            }
+
+            return hourList;
         }
 
         [TearDown]

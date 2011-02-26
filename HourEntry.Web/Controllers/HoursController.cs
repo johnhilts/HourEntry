@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HourEntry.Services;
 using HourEntry.Web.Models;
 
 namespace HourEntry.Web.Controllers
@@ -18,6 +19,11 @@ namespace HourEntry.Web.Controllers
         /// <returns>Model</returns>
         public ViewResult TimeSheet()
         {
+            ModelUtility modelUtility = new ModelUtility();
+            PresenterService presenterService = new PresenterService();
+            List<SelectListItem> hourList = modelUtility.GetHourSelectList("", presenterService.GetDefaultTimeSheet().HourList);
+            ViewBag.StartHourList = hourList;
+
             List<SelectListItem> amPmList = new List<SelectListItem>
                        {
                            new SelectListItem {Selected = false, Text = "AM", Value = "AM"},
@@ -27,7 +33,8 @@ namespace HourEntry.Web.Controllers
             ViewBag.AmPmList = amPmList;
             TimeSheetModel model = new TimeSheetModel
                                        {
-                                           AmPm = "AM",
+                                           StartHour = 1,
+                                           StartAmPm = "AM",
                                            StartDate = DateTime.Today,
                                            EndDate = DateTime.Today,
                                        };

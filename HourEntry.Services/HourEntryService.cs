@@ -7,6 +7,7 @@ using HourEntry.Infrastructure.Database.Data;
 
 namespace HourEntry.Services
 {
+    // service wrapper for domain 
     public class HourEntryService
     {
         private readonly IHourEntryRepository _hourEntryRepository;

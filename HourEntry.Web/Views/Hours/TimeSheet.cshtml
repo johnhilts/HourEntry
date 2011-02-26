@@ -8,7 +8,8 @@
 @using (Html.BeginForm())
 { 
 
-    @Html.DropDownListFor(m => m.AmPm, ViewBag.AmPmList as List<SelectListItem>);
+    @Html.DropDownListFor(m => m.StartHour, ViewBag.StartHourList as List<SelectListItem>);
+    @Html.DropDownListFor(m => m.StartAmPm, ViewBag.AmPmList as List<SelectListItem>);
                                           
     @Html.EditorFor(m => m.Comments);
 

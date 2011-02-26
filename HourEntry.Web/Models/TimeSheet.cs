@@ -12,24 +12,32 @@ namespace HourEntry.Web.Models
     /// </summary>
     public class TimeSheetModel
     {
-        public List<short> HourList { get; set; }
+        [Required]
+        [DisplayName("Start Time:")]
+        public short StartHour { get; set; }
 
-        public List<short> MinuteList { get; set; }
-        
-        public string AmPm { get; set; }
-        
+        [Required]
+        public short StartMinuteList { get; set; }
+
+        [Required]
+        public string StartAmPm { get; set; }
+
+        [Required]
+        [DisplayName("Project:")]
         public List<string> ProjectList { get; set; }
-        
+
+        [DataType(DataType.MultilineText)]
+        [DisplayName("Comments:")]
         public string Comments { get; set; }
-        
+
         [Required]
         [DataType(DataType.Date)]
-        [DisplayName("Start Date")]
+        [DisplayName("Start Date:")]
         public DateTime StartDate { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayName("Start Date")]
+        [DisplayName("End Date:")]
         public DateTime EndDate { get; set; }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelUtility.cs" />
     <Compile Include="Models\TimeSheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,6 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Hours\TimeSheet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HourEntry.Services\HourEntry.Services.csproj">
+      <Project>{758C9E49-E0FC-441E-8EA9-C8C9AC35DBA8}</Project>
+      <Name>HourEntry.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
