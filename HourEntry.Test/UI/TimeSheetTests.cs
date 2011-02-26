@@ -40,6 +40,8 @@ namespace HourEntry.Test.UI
 
         private void VerifyControlsPopulatedWithDefaultValues()
         {
+            Hashtable startHourList = new Hashtable {{"1", "1"}, {"2", "2"}};
+            this._browserTester.VerifySelect("StartHour", "Start Hour List", startHourList);
             Hashtable amPmList = new Hashtable {{"AM", "AM"}, {"PM", "PM"}};
             this._browserTester.VerifySelect("AmPm", "AM PM List", amPmList);
             this._browserTester.VerifyText("StartDate", "Start Date", DateTime.Today.ToShortDateString());
