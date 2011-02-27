@@ -16,19 +16,36 @@ namespace HourEntry.Services
             return new DefaultTimeSheet
                        {
                            HourList = this.GetHourList(),
+                           MinuteList = this.GetMinuteList(),
+                           AmPmList = this.GetAmPmList(),
                        };
         }
 
         private List<short> GetHourList()
         {
             List<short> hourList = new List<short>();
-            for (short i = 1; i < 12; i++)
+            for (short hour = 1; hour <= 12; hour++)
             {
-                hourList.Add(i);
+                hourList.Add(hour);
             }
 
             return hourList;
         }
 
+        private List<short> GetMinuteList()
+        {
+            List<short> minuteList = new List<short>();
+            for (short minute = 0; minute <= 45; minute += 15)
+            {
+                minuteList.Add(minute);
+            }
+
+            return minuteList;
+        }
+
+        private List<string> GetAmPmList()
+        {
+            return new List<string> { "AM", "PM" };
+        }
     }
 }

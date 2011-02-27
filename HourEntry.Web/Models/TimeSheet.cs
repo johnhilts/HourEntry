@@ -17,10 +17,20 @@ namespace HourEntry.Web.Models
         public short StartHour { get; set; }
 
         [Required]
-        public short StartMinuteList { get; set; }
+        public short StartMinute { get; set; }
 
         [Required]
         public string StartAmPm { get; set; }
+
+        [Required]
+        [DisplayName("End Time:")]
+        public short EndHour { get; set; }
+
+        [Required]
+        public short EndMinute { get; set; }
+
+        [Required]
+        public string EndAmPm { get; set; }
 
         [Required]
         [DisplayName("Project:")]

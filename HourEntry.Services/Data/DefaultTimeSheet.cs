@@ -11,5 +11,7 @@ namespace HourEntry.Services.Data
     public class DefaultTimeSheet
     {
         public List<short> HourList { get; set; }
+        public List<short> MinuteList { get; set; }
+        public List<string> AmPmList { get; set; }
     }
 }

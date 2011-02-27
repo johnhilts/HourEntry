@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HourEntry.Services;
+using HourEntry.Services.Data;
 using HourEntry.Web.Models;
 
 namespace HourEntry.Web.Controllers
@@ -21,20 +22,22 @@ namespace HourEntry.Web.Controllers
         {
             ModelUtility modelUtility = new ModelUtility();
             PresenterService presenterService = new PresenterService();
-            List<SelectListItem> hourList = modelUtility.GetHourSelectList("", presenterService.GetDefaultTimeSheet().HourList);
-            ViewBag.StartHourList = hourList;
+            DefaultTimeSheet defaultTimeSheet = presenterService.GetDefaultTimeSheet();
+            ViewBag.StartHourList = modelUtility.GetSelectList("", defaultTimeSheet.HourList);
+            ViewBag.StartMinuteList = modelUtility.GetSelectList("", defaultTimeSheet.MinuteList);
+            ViewBag.StartAmPmList = modelUtility.GetSelectList("", defaultTimeSheet.AmPmList);
+            ViewBag.EndHourList = modelUtility.GetSelectList("", defaultTimeSheet.HourList);
+            ViewBag.EndMinuteList = modelUtility.GetSelectList("", defaultTimeSheet.MinuteList);
+            ViewBag.EndAmPmList = modelUtility.GetSelectList("", defaultTimeSheet.AmPmList);
 
-            List<SelectListItem> amPmList = new List<SelectListItem>
-                       {
-                           new SelectListItem {Selected = false, Text = "AM", Value = "AM"},
-                           new SelectListItem {Selected = false, Text = "PM", Value = "PM"},
-                       };
-
-            ViewBag.AmPmList = amPmList;
             TimeSheetModel model = new TimeSheetModel
                                        {
                                            StartHour = 1,
+                                           StartMinute = 1,
                                            StartAmPm = "AM",
+                                           EndHour = 1,
+                                           EndMinute = 1,
+                                           EndAmPm = "AM",
                                            StartDate = DateTime.Today,
                                            EndDate = DateTime.Today,
                                        };

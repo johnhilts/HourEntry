@@ -8,32 +8,32 @@ namespace HourEntry.Web.Models
 {
     public class ModelUtility
     {
-        public List<SelectListItem> GetHourSelectList(string selected, List<short> hourList)
+        public List<SelectListItem> GetSelectList<T>(string selected, List<T> list)
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (short hour in hourList)
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            foreach (T item in list)
             {
-                list.Add(new SelectListItem
+                selectList.Add(new SelectListItem
                              {
                                  Selected = false,
-                                 Text = hour.ToString(),
-                                 Value = hour.ToString(),
+                                 Text = item.ToString(),
+                                 Value = item.ToString(),
                              });
             }
 
-            return SetSelectedListItem(selected, list);
+            return SetSelectedListItem(selected, selectList);
         }
 
-        public List<SelectListItem> SetSelectedListItem(string selected, List<SelectListItem> list)
+        public List<SelectListItem> SetSelectedListItem(string selected, List<SelectListItem> selectList)
         {
             if (string.IsNullOrEmpty(selected))
-                return list;
+                return selectList;
 
-            int index = list.FindIndex(x => x.Value == selected);
+            int index = selectList.FindIndex(x => x.Value == selected);
             if (index >= 0)
-                list[index].Selected = true;
+                selectList[index].Selected = true;
 
-            return list;
+            return selectList;
         }
     }
 }
