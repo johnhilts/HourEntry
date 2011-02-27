@@ -11,10 +11,12 @@ namespace HourEntry.Services
     /// </summary>
     public class PresenterService
     {
-        public DefaultTimeSheet GetDefaultTimeSheet()
+        public DefaultTimeSheet GetDefaultTimeSheet(DateTime currentTime)
         {
+            int currentHour = currentTime.Hour;
             return new DefaultTimeSheet
                        {
+                           Hour = currentHour > 12 ? currentHour - 12 : currentHour,
                            HourList = this.GetHourList(),
                            MinuteList = this.GetMinuteList(),
                            AmPmList = this.GetAmPmList(),
@@ -32,12 +34,12 @@ namespace HourEntry.Services
             return hourList;
         }
 
-        private List<short> GetMinuteList()
+        private List<string> GetMinuteList()
         {
-            List<short> minuteList = new List<short>();
+            List<string> minuteList = new List<string>();
             for (short minute = 0; minute <= 45; minute += 15)
             {
-                minuteList.Add(minute);
+                minuteList.Add(minute.ToString("00"));
             }
 
             return minuteList;

@@ -21,19 +21,19 @@ namespace HourEntry.Web.Models
                              });
             }
 
-            return SetSelectedListItem(selected, selectList);
+            return selectList; // SetSelectedListItem(selected, selectList);
         }
 
-        public List<SelectListItem> SetSelectedListItem(string selected, List<SelectListItem> selectList)
-        {
-            if (string.IsNullOrEmpty(selected))
-                return selectList;
+        //public List<SelectListItem> SetSelectedListItem(string selected, List<SelectListItem> selectList)
+        //{
+        //    if (string.IsNullOrEmpty(selected))
+        //        return selectList;
 
-            int index = selectList.FindIndex(x => x.Value == selected);
-            if (index >= 0)
-                selectList[index].Selected = true;
+        //    int index = selectList.FindIndex(x => x.Value == selected);
+        //    if (index >= 0)
+        //        selectList[index].Selected = true;
 
-            return selectList;
-        }
+        //    return selectList;
+        //}
     }
 }

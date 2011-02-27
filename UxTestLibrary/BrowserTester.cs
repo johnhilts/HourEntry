@@ -157,7 +157,7 @@ namespace UxTestLibrary
         }
 
         /// <summary>
-        /// Verify that text field's text is equal to supplied string
+        /// Verify that select list's options match supplied list
         /// </summary>
         /// <param name="id">control ID</param>
         /// <param name="controlName">friendly name for convenience</param>
@@ -172,6 +172,21 @@ namespace UxTestLibrary
                 actualList.Add(s, s);
             }
             Assert.That(actualList, Is.EquivalentTo(verifyList), "Lists Don't match: {0}", controlName);
+        }
+
+        /// <summary>
+        /// Verify select list's selected option
+        /// </summary>
+        /// <param name="id">control ID</param>
+        /// <param name="controlName">friendly name for convenience</param>
+        /// <param name="selectedOptionValue">option value to verify selected</param>
+        /// <param name="selectedOptionText">option text to verify selected</param>
+        public void VerifySelectedOption(string id, string controlName, string selectedOptionValue, string selectedOptionText)
+        {
+            SelectList selectList = this._ie.SelectList(Find.ById(new Regex(id)));
+            Assert.That(selectList.Exists, Is.True, "No {0} Select List", controlName);
+            Assert.That(selectList.SelectedOption.Value, Is.EqualTo(selectedOptionValue), "Wrong Option Value: {0}", controlName);
+            Assert.That(selectList.SelectedOption.Text, Is.EqualTo(selectedOptionText), "Wrong Option Value: {0}", controlName);
         }
 
         /// <summary>

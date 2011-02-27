@@ -10,8 +10,9 @@ namespace HourEntry.Services.Data
     /// </summary>
     public class DefaultTimeSheet
     {
+        public int Hour { get; set; }
         public List<short> HourList { get; set; }
-        public List<short> MinuteList { get; set; }
+        public List<string> MinuteList { get; set; }
         public List<string> AmPmList { get; set; }
     }
 }

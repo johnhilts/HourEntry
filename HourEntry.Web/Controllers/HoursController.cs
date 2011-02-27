@@ -22,8 +22,8 @@ namespace HourEntry.Web.Controllers
         {
             ModelUtility modelUtility = new ModelUtility();
             PresenterService presenterService = new PresenterService();
-            DefaultTimeSheet defaultTimeSheet = presenterService.GetDefaultTimeSheet();
-            ViewBag.StartHourList = modelUtility.GetSelectList("", defaultTimeSheet.HourList);
+            DefaultTimeSheet defaultTimeSheet = presenterService.GetDefaultTimeSheet(DateTime.Now);
+            ViewBag.StartHourList = modelUtility.GetSelectList(defaultTimeSheet.Hour.ToString(), defaultTimeSheet.HourList);
             ViewBag.StartMinuteList = modelUtility.GetSelectList("", defaultTimeSheet.MinuteList);
             ViewBag.StartAmPmList = modelUtility.GetSelectList("", defaultTimeSheet.AmPmList);
             ViewBag.EndHourList = modelUtility.GetSelectList("", defaultTimeSheet.HourList);
@@ -32,10 +32,10 @@ namespace HourEntry.Web.Controllers
 
             TimeSheetModel model = new TimeSheetModel
                                        {
-                                           StartHour = 1,
+                                           StartHour = defaultTimeSheet.Hour,
                                            StartMinute = 1,
                                            StartAmPm = "AM",
-                                           EndHour = 1,
+                                           EndHour = defaultTimeSheet.Hour,
                                            EndMinute = 1,
                                            EndAmPm = "AM",
                                            StartDate = DateTime.Today,

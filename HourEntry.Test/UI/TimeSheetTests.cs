@@ -46,9 +46,12 @@ namespace HourEntry.Test.UI
             this._browserTester.VerifySelect("StartHour", "Start Hour List", hourList);
             this._browserTester.VerifySelect("StartMinute", "Start Minute List", minuteList);
             this._browserTester.VerifySelect("StartAmPm", "AM PM List", amPmList);
+            string currentHour = Convert.ToInt32(DateTime.Now.ToString("hh")).ToString();
+            this._browserTester.VerifySelectedOption("StartHour", "Start Hour List", currentHour, currentHour);
             this._browserTester.VerifySelect("EndHour", "End Hour List", hourList);
             this._browserTester.VerifySelect("EndMinute", "End Minute List", minuteList);
             this._browserTester.VerifySelect("EndAmPm", "AM PM List", amPmList);
+            this._browserTester.VerifySelectedOption("EndHour", "End Hour List", currentHour, currentHour);
             this._browserTester.VerifyText("StartDate", "Start Date", DateTime.Today.ToShortDateString());
             this._browserTester.VerifyText("EndDate", "End Date", DateTime.Today.ToShortDateString());
         }
@@ -69,11 +72,11 @@ namespace HourEntry.Test.UI
             Hashtable minuteList = new Hashtable();
             for (int minute = 0; minute < 46; minute += 15)
             {
-                minuteList.Add(minute.ToString(), minute.ToString());
+                minuteList.Add(minute.ToString("00"), minute.ToString("00"));
             }
 
-            Assert.That(minuteList.ContainsKey("0"));
-            Assert.That(minuteList.ContainsValue("0"));
+            Assert.That(minuteList.ContainsKey("00"));
+            Assert.That(minuteList.ContainsValue("00"));
             Assert.That(minuteList.ContainsKey("15"));
             Assert.That(minuteList.ContainsValue("15"));
             Assert.That(minuteList.ContainsKey("30"));

@@ -14,7 +14,7 @@ namespace HourEntry.Web.Models
     {
         [Required]
         [DisplayName("Start Time:")]
-        public short StartHour { get; set; }
+        public int StartHour { get; set; }
 
         [Required]
         public short StartMinute { get; set; }
@@ -24,7 +24,7 @@ namespace HourEntry.Web.Models
 
         [Required]
         [DisplayName("End Time:")]
-        public short EndHour { get; set; }
+        public int EndHour { get; set; }
 
         [Required]
         public short EndMinute { get; set; }
