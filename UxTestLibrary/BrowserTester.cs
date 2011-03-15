@@ -217,7 +217,7 @@ namespace UxTestLibrary
                 Assert.That(txt.Text, Is.Not.Null & Is.Not.Empty, "Expected to have some text in {0}", controlName);
             }
             else
-                Assert.That(txt.Text, Is.Empty, "Expected to have NO text in {0}", controlName);
+                Assert.That(txt.Text, Is.Null, "Expected to have NO text in {0}", controlName);
         }
 
         // TODO: we can DRY VerifyText and VerifyLabelText with Generics
