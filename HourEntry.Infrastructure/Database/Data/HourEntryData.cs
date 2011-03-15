@@ -15,8 +15,8 @@ namespace HourEntry.Infrastructure.Database.Data
         [Column]
         public int ProjectId { get; set; }
 
-        [Column(DbType = "tinyint")]
-        public short Hours { get; set; }
+        [Column(DbType = "float")]
+        public decimal Hours { get; set; }
 
         [Column(DbType = "smalldatetime")]
         public DateTime StartDate { get; set; }

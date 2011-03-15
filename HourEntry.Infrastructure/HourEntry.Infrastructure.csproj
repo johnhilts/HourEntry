@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Database\BaseRepository.cs" />
     <Compile Include="Database\Data\ProjectData.cs" />
+    <Compile Include="Database\IHourEntryRepository.cs" />
     <Compile Include="Database\IProjectRepository.cs" />
     <Compile Include="Database\ProjectRepository.cs" />
     <Compile Include="Database\Data\HourEntryData.cs" />

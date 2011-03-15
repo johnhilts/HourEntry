@@ -1,0 +1,43 @@
+﻿"HourEntry" screen
+- replace with /Hours/List/
+- only show hours from this month and the previous month
+- same links: Time-Sheet Mode, Reports, Summary
+
+"Reports" and "Summary"
+- same functionality for now
+
+"TimeSheet Mode"
+== GET ==
+- note which user is being saved [authenticated]
+- Dates - use textboxes that will re-use ajax calendar control
+- should load hours, minutes, am/pm
+- should load project list
+- should load today's date into start and end date entry textboxes
+
+have a service call a domain object that gets me all of that info to feed my model
+
+== POST ==
+
+
+Domain
+
+==Entities==
+Hour
+Project
+User
+
+entities are not DTOs - entities traffic in DTOs
+
+entities are classes with behavior - remember, they adhere to SRP and have methods to operate on class' state/data
+
+==Services==
+Statistics
+Hours
+Projects
+
+services can be on any layer - app, domain, or infrastructure
+
+==Presenter==
+UI services
+
+

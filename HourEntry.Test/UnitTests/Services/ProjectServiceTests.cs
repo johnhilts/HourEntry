@@ -81,7 +81,7 @@ namespace HourEntry.Test.UnitTests.Services
         }
 
         [Test]
-        public void Update()
+        public void Should_Be_Able_To_Update()
         {
             // arrange
             int projectId = 1;
@@ -107,7 +107,7 @@ namespace HourEntry.Test.UnitTests.Services
         }
 
         [Test]
-        public void Add()
+        public void Should_Be_Able_To_Add()
         {
             // arrange
             ProjectData projectData = new ProjectData {Description = "Test Description",};

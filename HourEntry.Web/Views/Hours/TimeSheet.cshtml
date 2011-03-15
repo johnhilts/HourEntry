@@ -1,0 +1,36 @@
+﻿@model HourEntry.Web.Models.TimeSheetModel
+@{
+    ViewBag.Title = "TimeSheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Time Sheet</h2>
+@using (Html.BeginForm())
+{ 
+    @Html.LabelFor(m => m.StartHour);
+    <span>&nbsp;</span>
+    @Html.DropDownListFor(m => m.StartHour, ViewBag.StartHourList as List<SelectListItem>, new { accesskey = "t" });
+    <span>:</span>
+    @Html.DropDownListFor(m => m.StartMinute, ViewBag.StartMinuteList as List<SelectListItem>);
+    @Html.DropDownListFor(m => m.StartAmPm, ViewBag.StartAmPmList as List<SelectListItem>);
+    <br />                                      
+    @Html.LabelFor(m => m.EndHour);
+    <span>&nbsp;</span>
+    @Html.DropDownListFor(m => m.EndHour, ViewBag.EndHourList as List<SelectListItem>);
+    <span>:</span>
+    @Html.DropDownListFor(m => m.EndMinute, ViewBag.EndMinuteList as List<SelectListItem>);
+    @Html.DropDownListFor(m => m.EndAmPm, ViewBag.EndAmPmList as List<SelectListItem>);
+    <br />                                      
+    @Html.EditorFor(m => m.Comments);
+    <br />
+    @Html.EditorFor(m => m.StartDate);
+    <span>&nbsp;</span>
+    @Html.EditorFor(m => m.EndDate);
+}
+
+<script language="javascript" type="text/javascript">
+    var startTimeLabel = $("label[for='StartHour']");
+    if (startTimeLabel) {
+        startTimeLabel.html(startTimeLabel.html().replace(/Time/, "<b>T</b>ime"));
+    }
+</script>
